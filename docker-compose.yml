@@ -33,5 +33,17 @@ services:
         volumes:
             - .:/library_front/app
 
+    proxy:
+        image: nginx
+        container_name: proxy
+        ports:
+            - 80:80
+        volumes:
+            - ./library_front/nginx.conf:/etc/nginx/nginx.conf
+        depends_on:
+            - front
+        
+
+
 volumes:
     pgdata:
