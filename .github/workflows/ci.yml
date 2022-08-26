@@ -1,0 +1,14 @@
+name: CI
+on:
+    push:
+        branches: [ main ]
+
+jobs: 
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Build app
+              run: docker-compose -f ./docker-compose.yml up --build -d
+        
