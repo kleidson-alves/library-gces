@@ -34,7 +34,7 @@ services:
             - .:/library_front/app
 
     proxy:
-        image: nginx
+        image: nginx:1.22.0
         container_name: proxy
         ports:
             - 80:80
