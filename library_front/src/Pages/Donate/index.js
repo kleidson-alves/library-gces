@@ -1,15 +1,16 @@
 import { React, useCallback, useState } from 'react';
 import { FaUserAlt, FaBook, FaCalendarAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../Components/Button';
 import Input from '../../Components/Input';
 import { createBook } from '../../Services/Axios/bookService';
-import { styles, Background, Center, Buttons } from './Style';
-import { useNavigate } from 'react-router-dom';
+import {
+  styles, Background, Center, Buttons,
+} from './Style';
 
-
-const Donate = () => {
+function Donate() {
   const [bookName, setBookName] = useState('');
-  const [bookAuthor, setBookAuthor] = useState('');  
+  const [bookAuthor, setBookAuthor] = useState('');
   const [bookReleaseYear, setBookReleaseYear] = useState();
 
   const navigate = useNavigate();
@@ -25,12 +26,12 @@ const Donate = () => {
       bookName,
       bookAuthor,
       bookReleaseYear,
-    ).then((response) => response.data)
+    ).then((response) => response.data);
     if (data) {
       alert('Cadastro de livro efetuado');
       return navigate('/');
     }
-  }
+  };
 
   useCallback(() => {
     createBook();
@@ -65,12 +66,12 @@ const Donate = () => {
           value={bookReleaseYear}
         />
         <Buttons>
-            <Button title="Cancelar" type="secondary" changeButton={cancel}/>
-            <Button title="Doar" type="primary" changeButton={submit}/>
+          <Button title="Cancelar" type="secondary" changeButton={cancel} />
+          <Button title="Doar" type="primary" changeButton={submit} />
         </Buttons>
       </Center>
     </Background>
   );
-};
+}
 
 export default Donate;

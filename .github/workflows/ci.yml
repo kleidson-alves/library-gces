@@ -30,7 +30,13 @@ jobs:
               run: docker exec library python manage.py makemigrations && docker exec library python manage.py migrate
             - name: Test
               run: docker exec library python manage.py test
-            - name: Test Front
-              run: docker exec library_app npm run test
-
-        
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - uses: actions/checkout@v3
+            - name: Build
+              run: docker-compose -f ./docker-compose.yml up --build -d
+            - name: Lint Front
+              run: docker exec library_app npx eslint src --quiet --ext ".js" --fix

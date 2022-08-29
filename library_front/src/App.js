@@ -1,8 +1,8 @@
 import './App.css';
-import  Rotas from './Routes';
+import Rotas from './Routes';
 
 function App() {
-  return(
+  return (
     <Rotas />
   );
 }

@@ -1,15 +1,17 @@
 import React from 'react';
 import styles from './Style';
 
-const LoginInput = ({
+function LoginInput({
   title, type, icon, onChange, value,
-}) => (
-  <div style={styles[type]}>
-    <div style={styles.icon}>
-      {icon}
+}) {
+  return (
+    <div style={styles[type]}>
+      <div style={styles.icon}>
+        {icon}
+      </div>
+      <input placeholder={title} style={styles.input} type={type} onChange={(text) => onChange(text)} value={value || ''} />
     </div>
-    <input placeholder={title} style={styles.input} type={type} onChange={(text) => onChange(text)} value={value || ''} />
-  </div>
-);
+  );
+}
 
 export default LoginInput;
