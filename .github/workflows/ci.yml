@@ -40,3 +40,5 @@ jobs:
               run: docker-compose -f ./docker-compose.yml up --build -d
             - name: Lint Front
               run: docker exec library_app npx eslint src --quiet --ext ".js" --fix
+            - name: Lint Back
+              run: docker exec library flake8 src/ accounts/ books/ --exit-zero
