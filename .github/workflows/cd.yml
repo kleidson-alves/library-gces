@@ -1,0 +1,24 @@
+name: CD
+on:
+  workflow_run:
+    workflows: [ CI ]
+    types:
+      - completed
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build back
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/library-gces-back ./library_back/
+      - name: Deploy back
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/library-gces-back
+      - name: Build back
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/library-gces-front ./library_front/
+      - name: Deploy back
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/library-gces-front
